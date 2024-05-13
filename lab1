@@ -67,9 +67,15 @@ IF @@RowCount=0
 RETURN;
 
 
+USE [U8211394]
+GO
+/****** Object:  StoredProcedure [dbo].[addBuses]    Script Date: 05/13/2024 21:17:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 -- Создание процедуры на добавление строки в таблицу buses --
-CREATE PROCEDURE addBuses(
-@Id  int,
+ALTER PROCEDURE [dbo].[addBuses](
 @Model nchar(20),
 @Capacity float,
 @DriverID int,
@@ -79,10 +85,9 @@ AS
 -- Добавляет строку  в таблицу Buses
 --и корректирует общее количество подчиненных строк с помощью триггера
 SET NOCOUNT ON;
-INSERT INTO buses(bus_id, model, capacity, driver_id, engineer_id)
-		VALUES(@Id, @Model, @Capacity, @DriverID, @EngineerID)
+INSERT INTO buses(model, capacity, driver_id, engineer_id)
+		VALUES(@Model, @Capacity, @DriverID, @EngineerID)
 RETURN;
-
 
 
 -- Тестирование процедуры addbuses --
